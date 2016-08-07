@@ -1,8 +1,8 @@
 <h1>Home Page</h1>
 
 <ul>
-  <li ng-repeat="movie in vm.movies">
-    {{movie.title}}
+  <li ng-repeat = "movie in vm.movies">
+    <b>Title</b>: {{movie.title}}, <b>Genre</b>: {{movie.genre}}
     <a href="/updateMovie/{{movie.id}}">Edit</a> |
     <a href="/deleteMovie/{{movie.id}}">Delete</a>
   </li>

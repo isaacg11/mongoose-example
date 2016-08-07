@@ -2,7 +2,7 @@ namespace app.Services {
   export class MovieService {
     private MovieResource;
 
-    public list() {
+    public getAll() {
       return this.MovieResource.query();
     }
 

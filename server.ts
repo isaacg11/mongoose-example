@@ -7,10 +7,14 @@ import cookieParser = require('cookie-parser');
 import bodyParser = require('body-parser');
 const app = express();
 
-require('./models/Movie');
 mongoose.connect('mongodb://localhost/myNewDB');
 
-// mongoose.connect('mongodb://localhost/myNewDB');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('Server connection successful!')
+});
+
 
 // view engine setup
 app.set('views', './views');
