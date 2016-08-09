@@ -22,49 +22,25 @@ namespace app.Controllers {
       }
     }
 
-    public save(movie) {
-      this.movieService.save(movie).then((res) => {
-        console.log(res);
+    public save() {
+      let params = {
+        title: this.movie.title,
+        genre: this.movie.genre,
+        id: this.id
+      };
+
+      this.movieService.save(params).then((res) => {
         this.$state.go('Home');
       });
     }
   }
 
-  // export class UpdateMovieController {
-  //   public movieToEdit;
-  //   public movieId;
-  //
-  //   constructor(
-  //     $http: ng.IHttpService,
-  //     $stateParams: ng.ui.IStateParamsService,
-  //     private movieService: app.Services.MovieService,
-  //     private $state: ng.ui.IStateService
-  //   ) {
-  //       let movieId = $stateParams['id'];
-  //   }
-  //
-  //   public edit($http: ng.IHttpService) {
-  //     this.movieToEdit._id = this.movieId;
-  //     $http.post('/api/movies/update', this.movieToEdit).then((res) => {
-  //       console.log(res)
-  //     })
-  //   }
-
-    // constructor(
-    //   private movieService: app.Services.MovieService,
-    //   private $state: ng.ui.IStateService,
-    //   $stateParams: ng.ui.IStateParamsService,
-    //   $http: ng.IHttpService
-    // ) {
-    //   let movieId = $stateParams['id'];
-    // }
-  // }
-
+  // DeleteMovie Controller
   export class DeleteMovieController {
-    public movieToDelete;
+    public id;
 
     public remove() {
-      this.movieService.remove(this.movieToDelete.id).then(() =>{
+      this.movieService.remove(this.id).then(() =>{
         this.$state.go("Home");
       })
     }
@@ -74,7 +50,9 @@ namespace app.Controllers {
       private $state: ng.ui.IStateService,
       $stateParams: ng.ui.IStateParamsService
     ) {
-      this.movieToDelete = movieService.get($stateParams['id']);
+      if($stateParams) {
+        this.id = $stateParams['id'];
+      }
     }
   }
 
