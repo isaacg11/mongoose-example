@@ -19,7 +19,7 @@ namespace app {
     }).state('UpdateMovie', {
       url: '/updateMovie/:id',
       templateUrl: '/templates/updateMovie.html',
-      controller: app.Controllers.UpdateMovieController,
+      controller: app.Controllers.AddMovieController,
       controllerAs: 'vm'
     }).state('DeleteMovie', {
       url: '/deleteMovie/:id',

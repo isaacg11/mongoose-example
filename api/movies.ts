@@ -6,22 +6,36 @@ let Movie = mongoose.model('Movie', {
   genre: String
 });
 
-/* POST movies */
+/* CREATE or UPDATE movies */
 router.post('/movies', function(req, res, next) {
-  let new_movie = new Movie({ title: req.body.title, genre: req.body.genre });
-  new_movie.save(function (err, res) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(res);
-    }
-  })
+  if(req.body.id === undefined){
+    let new_movie = new Movie({
+      title: req.body.title,
+      genre: req.body.genre
+    });
+    new_movie.save(function (err, res) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(res);
+      }
+    })
+  }
+  else{
+    Movie.findByIdAndUpdate(req.body.id, { $set: { title: req.body.title, genre: req.body.genre}}, function (err, movie) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(movie);
+      }
+      res.send(req.body);
+    });
+  }
 });
 
 /* GET movies */
 router.get('/movies', function(req, res, next) {
   Movie.find({}).then(function(movies){
-    console.log(movies);
     res.json(movies);
   })
 });

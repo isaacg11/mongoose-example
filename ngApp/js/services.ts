@@ -1,6 +1,7 @@
 namespace app.Services {
   export class MovieService {
     private MovieResource;
+    private UpdateResource;
 
     public getAll() {
       return this.MovieResource.query();
