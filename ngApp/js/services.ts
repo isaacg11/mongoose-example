@@ -1,7 +1,10 @@
 namespace app.Services {
   export class MovieService {
     private MovieResource;
-    private UpdateResource;
+
+    constructor(private $resource: ng.resource.IResourceService){
+      this.MovieResource = $resource('/api/movies/:id');
+    }
 
     public getAll() {
       return this.MovieResource.query();
@@ -18,9 +21,19 @@ namespace app.Services {
     public remove(id) {
       return this.MovieResource.remove({id:id}).$promise;
     }
+  }
+
+  export class UserService {
+    private UserResource;
+
     constructor(private $resource: ng.resource.IResourceService){
-      this.MovieResource = $resource('/api/movies/:id');
+      this.UserResource = $resource('/api/users/:id');
+    }
+
+    public login(user) {
+      return this.UserResource.save(user).$promise;
     }
   }
   angular.module('app').service('movieService', MovieService);
+  angular.module('app').service('userService', UserService);
 }

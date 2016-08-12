@@ -7,7 +7,7 @@ namespace app {
     $urlRouterProvider: ng.ui.IUrlRouterProvider) => {
 
     $stateProvider.state('Home', {
-      url: '/',
+      url: '/home',
       templateUrl: '/templates/home.html',
       controller: app.Controllers.HomeController,
       controllerAs: 'vm'
@@ -26,7 +26,13 @@ namespace app {
       templateUrl: '/templates/deleteMovie.html',
       controller: app.Controllers.DeleteMovieController,
       controllerAs: 'vm'
+    }).state('Login', {
+      url: '/',
+      templateUrl: '/templates/login.html',
+      controller: app.Controllers.LoginController,
+      controllerAs: 'vm'
     });
+
 
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);

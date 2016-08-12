@@ -5,8 +5,11 @@ namespace app.Controllers {
     public movies;
     constructor(private movieService: app.Services.MovieService) {
       this.movies = movieService.getAll();
+      let test = localStorage.getItem("id");
+      console.log(test);
     }
   }
+
   // AddMovie Controller
   export class AddMovieController {
     public movie;
@@ -53,6 +56,25 @@ namespace app.Controllers {
       if($stateParams) {
         this.id = $stateParams['id'];
       }
+    }
+  }
+
+  // Register/Login Controller
+  export class LoginController {
+    public user;
+
+    constructor(
+      private userService: app.Services.UserService,
+      private $state: ng.ui.IStateService
+    ) {
+
+    }
+
+    public login() {
+      this.userService.login(this.user).then((res) => {
+        localStorage.setItem("id", res._id);
+        this.$state.go('Home');
+      });
     }
   }
 

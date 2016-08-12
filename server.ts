@@ -34,6 +34,7 @@ app.use('/scripts', express.static('bower_components'));
 app.use('/api', require('./api/makes'));
 app.use('/api', require('./api/cars'));
 app.use('/api', require('./api/movies'));
+app.use('/api', require('./api/users'));
 app.use('/api', require('./api/genres'));
 app.use('/api', require('./api/guestbook'));
 app.use('/api', require('./api/deepThought'));
