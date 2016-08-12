@@ -3,10 +3,11 @@ namespace app.Controllers {
   // Home Controller
   export class HomeController {
     public movies;
+    public user;
+
     constructor(private movieService: app.Services.MovieService) {
-      this.movies = movieService.getAll();
-      let test = localStorage.getItem("id");
-      console.log(test);
+      this.user = localStorage.getItem("id");
+      this.movies = movieService.getAll(this.user);
     }
   }
 
@@ -14,6 +15,7 @@ namespace app.Controllers {
   export class AddMovieController {
     public movie;
     public id;
+    public user;
 
     constructor(
       private movieService: app.Services.MovieService,
@@ -23,13 +25,15 @@ namespace app.Controllers {
       if($stateParams) {
         this.id = $stateParams['id'];
       }
+      this.user = localStorage.getItem("id");
     }
 
     public save() {
       let params = {
         title: this.movie.title,
         genre: this.movie.genre,
-        id: this.id
+        id: this.id,
+        owner: this.user
       };
 
       this.movieService.save(params).then((res) => {

@@ -6,8 +6,8 @@ namespace app.Services {
       this.MovieResource = $resource('/api/movies/:id');
     }
 
-    public getAll() {
-      return this.MovieResource.query();
+    public getAll(user) {
+      return this.MovieResource.query({id: user});
     }
 
     public save(movie) {
